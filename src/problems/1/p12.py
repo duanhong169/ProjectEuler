@@ -30,6 +30,32 @@ def gen_triangle_numbers():
 my_triangle_numbers_gen = gen_triangle_numbers()
 
 for i in my_triangle_numbers_gen:
+    num_divisors = 1
+    my_primes_gen = gen_primes()
+    temp_i = i
+    for x in my_primes_gen:
+        if(x*x) > temp_i:
+            num_divisors *= 2
+            break
+        
+        exponent = 1
+        
+        while(temp_i%x == 0):
+            exponent += 1
+            temp_i /= x
+        if exponent > 1:
+            num_divisors *= exponent
+        if(temp_i == 1):
+            break
+    if(num_divisors > 500):
+        print(i)
+        break
+
+# 当因数恰好为平方根时, 对计数进行修正
+'''  by myself.
+my_triangle_numbers_gen = gen_triangle_numbers()
+
+for i in my_triangle_numbers_gen:
     num_divisors = 2
     for x in range(2, int(sqrt(i))):
         if(i%x == 0):
@@ -39,3 +65,4 @@ for i in my_triangle_numbers_gen:
     if(num_divisors > 500):
         print(i)
         break
+'''
